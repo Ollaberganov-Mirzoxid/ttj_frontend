@@ -1,21 +1,3 @@
-// =================== Statistika hisoblash animatsiyasi ============
-function animateCount(id, target) {
-    let current = 0;
-    const steps = 100;
-    const increment = Math.ceil(target / steps);
-    const duration = 1000;
-    const intervalTime = duration / steps;
-
-    const counter = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-            current = target;
-            clearInterval(counter);
-        }
-        document.getElementById(id).innerText = current.toLocaleString(); // formatlangan chiqish
-    }, intervalTime);
-}
-
 // =================== Modal oynalarni boshqarish ===================
 function toggleModal(id, show) {
     const modal = document.getElementById(id);
@@ -33,7 +15,7 @@ function openLoginModal() {
 function closeLoginModal() {
     toggleModal("loginModal", false);
     // Modal yopilganda inputlarni tozalash
-    document.getElementById('email').value = '';
+    document.pending('email').value = '';
     document.getElementById('password').value = '';
     document.getElementById('responseMessage').innerText = '';
 }

@@ -1,4 +1,3 @@
-
 // =================== Dropdown menyuni boshqarish ==================
 document.addEventListener("DOMContentLoaded", () => {
     const userMenuBtn = document.getElementById("userMenuBtn");

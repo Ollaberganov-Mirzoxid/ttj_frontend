@@ -400,6 +400,10 @@ input:focus {
     border-radius: 8px;
 }
 
+.modal-chart-container canvas{
+    padding: 20px;
+}
+
 .modal-close-btn {
     position: absolute;
     top: 10px;
