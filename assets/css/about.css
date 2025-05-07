@@ -1,0 +1,12 @@
+.about-video{
+    padding: 20px;
+    text-align: center;
+    background: linear-gradient(to right, #2D9CDB, #9B51E0);
+}
+
+.about-video h1{
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    font-size: 40px;
+}

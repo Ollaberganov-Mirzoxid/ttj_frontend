@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ariza berish</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <style>
+        * {
+            scrollbar-width: none;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        input,
+        .form-select {
+            color: rgba(51, 51, 51, 0.7) !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-5 mb-5" style="max-width: 800px;">
+        <h2 class="text-center alert alert-info fw-bold d-flex justify-content-between align-items-center">
+            <a href="index.html"><i class="fas fa-arrow-left text-dark"></i></a>
+            Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti talabalar turar Joyiga ariza
+            berish
+            <span></span>
+        </h2>
+
+        <form id="myForm">
+            <div class="mb-3">
+                <label class="form-label">JSHSHIR *</label>
+                <input type="text" id="jshshir" name="jshshir" class="form-control" maxlength="14"
+                    placeholder="99999999999999" oninput="validateInput(this)" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Pasport Seriya va raqami *</label>
+                <input type="text" id="passport" name="passport" class="form-control" placeholder="ADXXXXXXX" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Pasport berilgan sana *</label>
+                <input type="date" id="passport_date" name="passport_date" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Doimiy ro‘yxatdan o‘tgan hudud *</label>
+                <select id="region" name="region" class="form-select" required>
+                    <option selected disabled>Qoraqalpog‘iston</option>
+                    <option>Xorazm</option>
+                    <option>Toshkent</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tuman/shahar *</label>
+                <select id="district" name="district" class="form-select" required>
+                    <option selected disabled>Urganch tuman</option>
+                    <option>Urganch shahar</option>
+                    <option>Hazorasp tuman</option>
+                    <option>Tuproqqala tuman</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Manzilingiz *</label>
+                <input type="text" id="address" name="address" class="form-control" placeholder="Manzil kiriting"
+                    required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Ta’lim muassasasi *</label>
+                <select id="university" name="university" class="form-select" required>
+                    <option selected disabled>TATU UF</option>
+                    <option>TTA UF</option>
+                    <option>UrDU</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Aka-uka / Opa-singil kontraktda o‘qiydimi? *</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="has_sibling" id="ha" value="true"
+                        onclick="toggleFields()" required>
+                    <label class="form-check-label" for="ha">Ha</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="has_sibling" id="yoq" value="false"
+                        onclick="toggleFields()">
+                    <label class="form-check-label" for="yoq">Yo‘q</label>
+                </div>
+            </div>
+
+            <div id="extraFields" style="display: none;">
+                <div class="mb-3">
+                    <label class="form-label">Qarindoshlik darajasi *</label>
+                    <select id="sibling_relation" name="sibling_relation" class="form-select">
+                        <option selected disabled>Aka/Uka</option>
+                        <option>Opa/Singil</option>
+                        <option>Otasi</option>
+                        <option>Onasi</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">JSHSHIR *</label>
+                    <input type="text" id="sibling_jshshir" name="sibling_jshshir" class="form-control" maxlength="14"
+                        placeholder="99999999999999" oninput="validateInput(this)">
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                Ta’lim muassasasi ma’lumotlarini tanlash imkoniyati faqatgina 2023-2024 o‘quv yilida tavsiya etilgan
+                talabalar uchun mavjud.
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Imtiyoz (agar mavjud bo‘lsa)</label>
+                <select id="privilege" name="privilege" class="form-select">
+                    <option selected disabled>Mavjud emas</option>
+                    <option>Yetim</option>
+                    <option>Nogiron</option>
+                    <option>Kam ta’minlangan</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefon raqam *</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="99897XXXXXXX"
+                    oninput="validateInput(this)" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Email *</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="email@example.com"
+                    required>
+            </div>
+
+            <div class="text-end">
+                <button type="button" class="btn btn-secondary" onclick="resetForm()">❌ Tozalash</button>
+                <button type="submit" class="btn btn-primary">📩 Yuborish</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Aka-uka/Opa-singil maydonini ko'rsatish
+            document.querySelectorAll('input[name="has_sibling"]').forEach(input => {
+                input.addEventListener('change', toggleFields);
+            });
+
+            toggleFields(); // Sahifa yuklanganda ham tekshirish
+
+            // Raqamli maydonlar uchun faqat raqam qabul qilish
+            document.getElementById('jshshir').addEventListener('input', () => validateInput(document.getElementById('jshshir')));
+            document.getElementById('sibling_jshshir').addEventListener('input', () => validateInput(document.getElementById('sibling_jshshir')));
+            document.getElementById('phone').addEventListener('input', () => validateInput(document.getElementById('phone')));
+
+            // Formani yuborish
+            document.getElementById('myForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                const token = localStorage.getItem('token');
+
+                const hasSibling = document.querySelector('input[name="has_sibling"]:checked')?.value === 'true';
+
+                const data = {
+                    jshshir: document.getElementById('jshshir').value,
+                    passport: document.getElementById('passport').value,
+                    passport_date: document.getElementById('passport_date').value,
+                    region: document.getElementById('region').value,
+                    district: document.getElementById('district').value,
+                    address: document.getElementById('address').value,
+                    university: document.getElementById('university').value,
+                    has_sibling: hasSibling,
+                    sibling_relation: hasSibling ? document.getElementById('sibling_relation').value : null,
+                    sibling_jshshir: hasSibling ? document.getElementById('sibling_jshshir').value : null,
+                    privilege: document.getElementById('privilege').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value
+                };
+
+                fetch('http://127.0.0.1:8000/api/ariza', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'Authorization': 'Bearer ' + token,
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(result => {
+                        if (result.message === "Ariza yaratildi") {
+                            alert("✅ Ariza muvaffaqiyatli yuborildi!");
+                            resetForm();
+                        } else {
+                            alert("❌ Ariza yuborishda xatolik: " + (result.message || JSON.stringify(result)));
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Xatolik:", error);
+                        alert("🚫 Tarmoqda muammo yuz berdi. Qayta urinib ko‘ring.");
+                    });
+            });
+        });
+
+        function toggleFields() {
+            const haRadio = document.getElementById("ha");
+            const extraFields = document.getElementById("extraFields");
+            extraFields.style.display = haRadio.checked ? "block" : "none";
+        }
+
+        function validateInput(input) {
+            input.value = input.value.replace(/\D/g, '');
+        }
+
+        function resetForm() {
+            document.getElementById("myForm").reset();
+            document.getElementById("extraFields").style.display = "none";
+        }
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

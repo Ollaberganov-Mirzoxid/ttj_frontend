@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Panel</title>
+
+    <!-- Local CSS fayllar -->
+    <link rel="stylesheet" href="../assets/css/show.css">
+    <link rel="stylesheet" href="../assets/css/main.css'">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+
+    <link rel="stylesheet" href="../assets/css/admin-main.css">
+
+    <!-- JS grafik linklar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CDN linklar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="admin-navbar">
+            <div class="logo">
+                <a href="#">
+                    <h1>TATU UF Talabalar Turar Joyi</h1>
+                </a>
+            </div>
+            <div class="profile-menu">
+                <!-- User Section -->
+                <div class="user" id="userMenuBtn">
+                    <i class="avatar fa-solid fa-user"></i>
+                    <span id="userNameDisplay">Foydalanuvchi</span>
+                </div>
+
+                <!-- Dropdown Menu -->
+                <ul id="userMenu">
+                    <li class="userMenu-li">
+                        <button onclick="editProfile()">
+                                <span class="userMenu-edit">
+                                    <i class="fas fa-user-pen"></i> Profilni tahrirlash
+                                </span>
+                            </button>
+                    </li>
+                    <li class="userMenu-li">
+                        <button onclick="logout()">
+                                <span class="userMenu-exit">
+                                    <i class="fas fa-right-from-bracket"></i> Chiqish
+                                </span>
+                            </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="admin-sidebar">
+            <a href="index.html" class="">Asosiy</a>
+            <a href="users.html" class="faqat-superadmin" style="display: none;">Talabalar</a>
+            <a href="masullar.html" class="active">Ma'sul Shaxslar</a>
+            <a href="aplications.html" class="">Arizalar</a>
+        </div>
+    </nav>
+
+    <section class="show-section">
+        <div class="content">
+            <div class="filter-buttons">
+                <h2 class="">Barcha Ma'sul Shaxslar</h2>
+                <button class="faqat-superadmin add-student" onclick="openMasulModal()" style="display: none;">
+                    <i class="fa-solid fa-plus"></i> Ma'sul qo'shish
+                </button>
+
+                <!-- Modal -->
+                <div id="masulModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" onclick="closeMasulModal()">&times;</span>
+                        <h2>Yangi Masʼul Qo‘shish</h2>
+                        <form id="masulForm">
+                            <label for="masul_name">Ism:</label>
+                            <input type="text" id="masul_name" name="name" required>
+
+                            <label for="masul_email">Email:</label>
+                            <input type="email" id="masul_email" name="email" required>
+
+                            <label for="masul_password">Parol:</label>
+                            <input type="password" id="masul_password" name="password" required>
+                            <!-- 
+                            <label for="masul_password_confirmation">Parolni tasdiqlang:</label>
+                            <input type="password" id="masul_password_confirmation" name="password_confirmation" required> -->
+
+                            <button type="submit">Yuborish</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th class="post-id">ID</th>
+                        <th class="post-title">F.I.O</th>
+                        <th>Email</th>
+                        <th class="action">Harakat</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body">
+                    <!-- JavaScript orqali foydalanuvchilar shu yerga joylanadi -->
+                </tbody>
+            </table>
+            <!-- Start Pagination -->
+            <div class="pagination-wrapper">
+                <ul class="pagination">
+                    <li class="active"><a href="">1</a></li>
+                    <li><a href="#">&gt;</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+    <script src="../assets/js/admin/auth.js"></script>
+    <script src="../assets/js/admin-main.js"></script>
+    <script src="../assets/js/admin/masullar.js"></script>
+</body>
+
+</html>

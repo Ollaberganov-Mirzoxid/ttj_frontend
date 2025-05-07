@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Panel</title>
+
+    <!-- Local CSS fayllar -->
+    <link rel="stylesheet" href="../assets/css/show.css">
+    <link rel="stylesheet" href="../assets/css/main.css'">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+
+    <link rel="stylesheet" href="../assets/css/admin-main.css">
+
+    <!-- JS grafik linklar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CDN linklar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+    <nav>
+        <div class="admin-navbar">
+            <div class="logo">
+                <a href="#">
+                    <h1>TATU UF Talabalar Turar Joyi</h1>
+                </a>
+            </div>
+            <div class="profile-menu">
+                <!-- User Section -->
+                <div class="user" id="userMenuBtn">
+                    <i class="avatar fa-solid fa-user"></i>
+                    <span id="userNameDisplay">Foydalanuvchi</span>
+                </div>
+
+                <!-- Dropdown Menu -->
+                <ul id="userMenu">
+                    <li class="userMenu-li">
+                        <button onclick="editProfile()">
+                            <span class="userMenu-edit">
+                                <i class="fas fa-user-pen"></i> Profilni tahrirlash
+                            </span>
+                        </button>
+                    </li>
+                    <li class="userMenu-li">
+                        <button onclick="logout()">
+                            <span class="userMenu-exit">
+                                <i class="fas fa-right-from-bracket"></i> Chiqish
+                            </span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="admin-sidebar">
+            <a href="index.html" class="">Asosiy</a>
+            <a href="users.html" class="faqat-superadmin" style="display: none;">Talabalar</a>
+            <a href="masullar.html" class="">Ma'sul Shaxslar</a>
+            <a href="aplications.html" class="active">Arizalar</a>
+        </div>
+    </nav>
+
+    <section class="show-section">
+        <div class="content">
+            <div class="filter-buttons">
+                <h2 class="">Barcha Arizalar</h2>
+            </div>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th class="post-id">ID</th>
+                        <th class="post-title">Yuboruvchi F.I.O</th>
+                        <th>Status</th>
+                        <th class="action">Harakat</th>
+                    </tr>
+                </thead>
+                <tbody id="user-table-body">
+                    <!-- JavaScript orqali foydalanuvchilar shu yerga joylanadi -->
+                </tbody>
+
+                <div id="show-aplication-Modal" class="show-aplication-modal">
+                    <div class="show-aplication-modal-content">
+                        <span class="close" onclick="closeModal()">&times;</span>
+                        <div class="ubtuit-logo-img">
+                            <img src="../assets/img/logo_ubtuit.png" alt="">
+                        </div>
+                        <h2 id="h2_tag_status"></h2>
+                        <h2>
+                            Muhammad al-Xorazmiy nomidagi Toshkent axborot 
+                            texnologiyalari universiteti Urganch filiali 
+                            talabalar turar joyiga '<span class="username_values"></span>'
+                            tomonidan berilgan ariza
+                        </h2>
+                        <div class="application-info">
+                            <div class="info-item">
+                                <span class="label">F.I.Sh:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">JSHSHIR:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Pasport Seriya va raqami:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Passport Berilgan Sana:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Doimiy ro‘yxatdan o‘tgan hudud:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Tuman/shahar:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Manzil:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Ta’lim muassasasi:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Aka-uka / Opa-singil kontraktda o‘qiydimi?:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Qarindoshlik darajasi:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">JSHSHIR:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Imtiyoz (agar mavjud bo‘lsa):</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Telefon raqam:</span>
+                                <span class="value"></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">Email:</span>
+                                <span class="value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </table>
+            <!-- Start Pagination -->
+            <div class="pagination-wrapper">
+                <ul class="pagination">
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script src="../assets/js/admin/auth.js"></script>
+    <script src="../assets/js/admin-main.js"></script>
+    <script src="../assets/js/admin/aplications.js"></script>
+</body>
+
+</html>

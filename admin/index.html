@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Panel</title>
+
+    <!-- Local CSS fayllar -->
+    <link rel="stylesheet" href="../assets/css/show.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/cards.css">
+
+    <link rel="stylesheet" href="../assets/css/admin-main.css">
+
+    <!-- JS grafik linklar -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- CDN linklar -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="admin-navbar">
+            <div class="logo">
+                <a href="#">
+                    <h1>TATU UF Talabalar Turar Joyi</h1>
+                </a>
+            </div>
+            <div class="profile-menu">
+                <!-- User Section -->
+                <div class="user" id="userMenuBtn">
+                    <i class="avatar fa-solid fa-user"></i>
+                    <span id="userNameDisplay">Foydalanuvchi</span>
+                </div>
+
+                <!-- Dropdown Menu -->
+                <ul id="userMenu">
+                    <li class="userMenu-li">
+                        <button onclick="editProfile()">
+                                <span class="userMenu-edit">
+                                    <i class="fas fa-user-pen"></i> Profilni tahrirlash
+                                </span>
+                            </button>
+                    </li>
+                    <li class="userMenu-li">
+                        <button onclick="logout()">
+                                <span class="userMenu-exit">
+                                    <i class="fas fa-right-from-bracket"></i> Chiqish
+                                </span>
+                            </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="admin-sidebar">
+            <a href="index.html" class="active">Asosiy</a>
+            <a href="users.html" class="faqat-superadmin" style="display: none;">Talabalar</a>
+            <a href="masullar.html" class="">Ma'sul Shaxslar</a>
+            <a href="aplications.html" class="">Arizalar</a>
+        </div>
+    </nav>
+
+    <section class="show-section">
+        <div class="content">
+            <div class="statistics-cards">
+                <h2 class="">Arizalar Statistikasi</h2>
+                <div class="statistics-card">
+                    <div class="all-posts">
+                        <div class="texts">
+                            <p>Yuborilgan arizalar</p>
+                            <h1>0</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="fa-solid fa-newspaper"></i>
+                        </div>
+                    </div>
+                    <div class="all-eyes">
+                        <div class="texts">
+                            <p>Tasdiqlangan arizalar</p>
+                            <h1>0</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="daily-added-posts">
+                        <div class="texts">
+                            <p>Rad etilgan arizalar</p>
+                            <h1>0</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="fa-solid fa-calendar-plus"></i>
+                        </div>
+                    </div>
+                    <div class="in-progress-posts">
+                        <div class="texts">
+                            <p>Jarayondagi arizalar</p>
+                            <h1>0</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </div>
+                </div>
+                <h2 class="">Talabalar Sig'imi Statistikasi</h2>
+                <div class="statistics-card">
+                    <div class="total-student-capacity">
+                        <div class="texts">
+                            <p>Jami Talabalar Sig'imi</p>
+                            <h1>0</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="mdi mdi-account-group"></i>
+                        </div>
+                    </div>
+                    <div class="empty-spaces">
+                        <div class="texts">
+                            <p>Bo'sh joylar</p>
+                            <h1>0</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="mdi mdi-bed-empty"></i>
+                        </div>
+                    </div>
+                    <div class="reserved-areas">
+                        <div class="texts">
+                            <p>Band qilingan joylar</p>
+                            <h1>0</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="mdi mdi-bed"></i>
+                        </div>
+                    </div>
+                    <div class="employment-rate">
+                        <div class="texts">
+                            <p>Bandlik Ko'rsatkichi %</p>
+                            <h1>0</h1>
+                        </div>
+                        <div class="icons">
+                            <i class="mdi mdi-percent"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="statistics-graphic ">
+                <!-- Kategoriyalar bo‘yicha postlar (Doughnut chart) -->
+                <div class="doughnut-chart ">
+                    <h2 class=" ">Arizalar Statistikasi</h2>
+                    <canvas id="categoryChart "></canvas>
+                </div>
+
+                <!-- Har kunlik grafik (Line chart) -->
+                <div class="line-chart ">
+                    <h2 class=" ">Talabalar Sig'imi Statistikasi</h2>
+                    <canvas id="dailyChart "></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Category chart
+        new Chart(document.getElementById('categoryChart'), {
+            type: 'doughnut',
+            data: {
+                labels: categoryLabels,
+                datasets: [{
+                    data: categoryData,
+                    backgroundColor: [
+                        '#fb6381', // Sport
+                        '#3b9ded', // Texnologiya
+                        '#ffd66b', // Madaniyat
+                        '#4ecdc4', // Siyosat
+                        '#a066f0', // Iqtisod
+                        '#fca35e' // Fan
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                cutout: '30%',
+                plugins: {
+                    legend: {
+                        position: 'right', // 👉 Vertikal (ustma-ust) joylashuv
+                        labels: {
+                            generateLabels: function(chart) {
+                                const data = chart.data;
+                                return data.labels.map((label, i) => ({
+                                    text: `${label} - ${data.datasets[0].data[i]}`,
+                                    fillStyle: data.datasets[0].backgroundColor[i],
+                                    strokeStyle: data.datasets[0].backgroundColor[i],
+                                    index: i
+                                }));
+                            },
+                            usePointStyle: true,
+                            font: {
+                                size: 14
+                            },
+                            boxWidth: 15,
+                            padding: 20 // 👉 Label’lar orasida bo‘shliq
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.label} - ${context.raw}`;
+                            }
+                        }
+                    }
+                }
+            }
+
+        });
+
+        // Daily views and posts chart
+        new Chart(document.getElementById('dailyChart'), {
+            type: 'line',
+            data: {
+                labels: ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba', 'Yakshanba'],
+                datasets: [{
+                    label: 'Ko‘rishlar',
+                    data: [120, 190, 300, 500, 200, 300, 400],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    tension: 0.4,
+                    yAxisID: 'y'
+                }, {
+                    label: 'Yangiliklar',
+                    data: [3, 5, 2, 6, 4, 3, 5],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    tension: 0.4,
+                    yAxisID: 'y1'
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        type: 'linear',
+                        position: 'left',
+                        beginAtZero: true
+                    },
+                    y1: {
+                        type: 'linear',
+                        position: 'right',
+                        beginAtZero: true,
+                        grid: {
+                            drawOnChartArea: false
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script src="../assets/js/admin/auth.js "></script>
+    <script src="../assets/js/admin-main.js "></script>
+
+</body>
+
+</html>

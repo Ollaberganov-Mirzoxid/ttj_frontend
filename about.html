@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TATU UF - TTJ</title>
+    <!-- Stillar uchun-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+
+    <!-- Google Fonts (ixtiyoriy) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <div class="logo-container">
+            <!-- Logotip o‘rni (xohlagan rasmingizni qo‘yishingiz mumkin) -->
+            <img src="assets/img/logo_ubtuit.png" alt="Universitet Logotipi">
+            <h2>TATU UF Talabalar Turar Joyi</h2>
+        </div>
+        <nav class="nav-links">
+            <ul>
+                <li><a href="index.html">Bosh sahifa</a></li>
+                <li style="background-color: rgba(255, 255, 255, 0.2)"><a href="about.html">TTJ haqida</a></li>
+                <li><a href="#" onclick="goToApplication(event)">Ariza berish</a></li>
+                <li><button class="open-modal-btn" id="loginBtn" onclick="openLoginModal()">Kirish</button></li>
+
+                <!-- Dropdown foydalanuvchi menyusi -->
+                <li id="userDropdown" style="display: none; position: relative;">
+                    <button class="profilMenu" id="userMenuBtn">
+                        <i class="fas fa-user"></i> <span id="userName">Foydalanuvchi</span>
+                    </button>
+                    <ul id="userMenu">
+                        <li class="userMenu-li">
+                            <button onclick="editProfile()">
+                                <span class="userMenu-edit">
+                                    <i class="fas fa-user-pen"></i> Profilni tahrirlash
+                                </span>
+                            </button>
+                        </li>
+                        <li class="userMenu-li">
+                            <button onclick="logout()">
+                                <span class="userMenu-exit">
+                                    <i class="fas fa-right-from-bracket"></i> Chiqish
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--Kirish Modal start-->
+                <div class="modal" id="loginModal">
+                    <div class="modal-content">
+                        <span class="close-btn" onclick="closeLoginModal()">&times;</span>
+                        <h2>Tizimga kirish</h2>
+                        <!--                        <p>Tizimga kirish uchun Hemis Login parolingizdan foydalaning</p>-->
+                        <p class="user-icon"><i class="fas fa-circle-user"></i></p>
+                        <p id="responseMessage" style="width: 100%; text-align: center; color: red;"></p>
+                        <div class="login-area">
+                            <label for="email">Login</label>
+                            <input type="email" id="email" placeholder="Emailingizni kiriting">
+                        </div>
+                        <div class="password-area">
+                            <label for="password">Parol</label>
+                            <input type="password" id="password" placeholder="Parolingizni kiriting">
+                        </div>
+                        <button class="login-btn" id="login-Btn">Kirish</button>
+                    </div>
+                </div>
+                <!--Kirish Modal end-->
+            </ul>
+        </nav>
+    </header>
+
+    <div class="header-section"></div>
+    <!-- TTJ haqida qisman start -->
+    <div class="main-conta">
+        <div class="container">
+            <!-- Yuqori qism: matn + rasm -->
+            <div class="top-row">
+                <!-- Chap tomondagi matn -->
+                <div class="text-side">
+                    <h2 class="section-title">
+                        Talabalar turar joyi <span>haqida</span>
+                    </h2>
+                    <p class="section-description">
+                        <strong>Muhammad Al-Xorazmiy nomidagi Toshkent Axborot Texnologiyalar Universiteti</strong>
+                        umumiy
+                        sig‘imi 208 nafar talabaga mo‘ljallangan 1 ta talabalar
+                        turar joyi mavjud.
+                    </p>
+                </div>
+                <!-- O'ng tomondagi rasm -->
+                <div class="image-side">
+                    <!-- O'zingiz xohlagan PNG/SVG rasmni qo'ying -->
+                    <img src="https://ttj.tersu.uz/agency/img/vector-art-2.png" alt="Student Illustration">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- TTJ haqida qisman end -->
+
+
+    <!-- Statistics Start -->
+    <div class="container-all-statistics">
+        <div class="container-statistics">
+            <div class="container-statistics-in">
+                <div class="container-statistic-in-icon">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <div class="container-statistic-in-text">
+                    <h4>Yuborilgan Arizalar</h4>
+                    <span class="count"><!--Ma'lumotlar bazadan kelishi shart--></span>
+                </div>
+            </div>
+            <div class="container-statistics-in">
+                <div class="container-statistic-in-icon">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="container-statistic-in-text">
+                    <h4>Qabul qilinganlar</h4>
+                    <span class="count"><!--Ma'lumotlar bazadan kelishi shart--></span>
+                </div>
+            </div>
+            <div class="container-statistics-in">
+                <div class="container-statistic-in-icon">
+                    <i class="fas fa-times"></i>
+                </div>
+                <div class="container-statistic-in-text">
+                    <h4>Rad Etilganlar</h4>
+                    <span class="count"><!--Ma'lumotlar bazadan kelishi shart--></span>
+                </div>
+            </div>
+            <div class="container-statistics-in">
+                <div class="container-statistic-in-icon">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <div class="container-statistic-in-text">
+                    <h4>Jarayondagilar</h4>
+                    <span class="count"><!--Ma'lumotlar bazadan kelishi shart--></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Statistics End -->
+    
+    <!-- TTJ haqida video start -->
+    <div class="about-video">
+        <h1>Talabalar Turar Joyi haqida video</h1>
+        <video width="80%" height="100%" controls>
+            <source src="assets/video/ttj.mp4" type="video/mp4">
+            Sizning brauzeringiz videoni qo‘llab-quvvatlamaydi.
+        </video>
+    </div>
+    <!-- TTJ haqida video end -->
+
+    <!--Joylashuv End -->
+    <div class="wrapper">
+        <div class="map">
+            <iframe
+                src="https://yandex.ru/map-widget/v1/?um=constructor%3A24818127d8d8b33556bc5a2dab2c80df53fef0b668d09b4d39e1ab6e2d799814&source=constructor"
+                width="600" height="400" frameborder="0" allowfullscreen="true" style="border:none;">
+            </iframe>
+        </div>
+        <div class="info">
+            <h2>Bog'lanish</h2>
+            <div class="texts">
+                <p><i class="fas fa-map-marker-alt"></i>Al-xorazmiy ko`chasi , 110, Urgench, Uzbekistan</p>
+                <p><i class="fas fa-phone-alt"></i> +998 62 224 64 32</p>
+                <p><i class="fas fa-envelope"></i> info@ubtuit.uz</p>
+            </div>
+        </div>
+    </div>
+    <!--Joylashuv End -->
+
+    <!-- Footer Start -->
+    <footer>
+        <p>© 2025 Muhammad Al-Xorazmiy nomidagi Toshkent Axborot Texnologiyalar Universiteti. Barcha huquqlar
+            himoyalangan.</p>
+    </footer>
+    <!-- Footer End -->
+
+    <script src="assets/js/script.js"></script>
+    <script src="assets/js/login.js"></script>
+
+</body>
+
+</html>
